@@ -4,13 +4,27 @@
     <meta charset="utf-8">
     <title>Captain Hindsight</title>
     <link rel="stylesheet" href="css/styles.css?v=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Captain Hindsight</a>
+    </div>
+    <form class="navbar-form navbar-left">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Enter Sleeper ID" name="search" id="search">
+      </div>
+      <button type="button" class="btn" onclick="myFunction()">Submit</button>
+    </form>
+  </div>
+</nav>
+
   <body>
-    <h2>Retrieving Sleeper User</h2>
-    <p id="demo">Tap the button</p>
-    <input type="text" id="fname" name="fname">
-    <button type="button" onclick="myFunction()">Try it</button>
     <ul id="transaction_list"></ul>
 
     <script src="javascript/client.js"></script>
