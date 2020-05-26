@@ -10,22 +10,27 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Captain Hindsight</a>
-    </div>
-    <form class="navbar-form navbar-left">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Enter Sleeper ID" name="search" id="search">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">Captain Hindsight</a>
       </div>
-      <button type="button" class="btn" onclick="myFunction()">Submit</button>
-    </form>
-  </div>
-</nav>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <button type="button" class="btn" style="float:right" onclick="myFunction()">Submit</button>
+          <div style="overflow: hidden; padding-right: .5em;">
+            <input type="text" class="form-control" placeholder="Enter Sleeper ID" name="search" id="search">
+          </div>
+        </div>
+      </form>
+    </div>
+  </nav>
+
+  <br><br><br>
+  <br><br><br>
 
   <body>
-    <ul id="transaction_list"></ul>
+    <div id="transaction_list"></div>
 
     <script src="javascript/client.js"></script>
   </body>

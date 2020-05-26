@@ -15,20 +15,20 @@
 
 .col-container {
     display: flex;
-    width: 100%;
 }
 
 img {
-    width: 100%;
+    width: 80%;
 }
 
 .reduced {
-    width: 72.5%;
+    width: 58%;
+}
+
+.row {
+    padding: 5px;
 }
 
 .row2 {
-  padding-top: 20px;
-  padding-right: 0px;
-  padding-bottom: 20px;
-  padding-left: 20px;
+    padding: 20px;
 }
