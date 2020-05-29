@@ -43,19 +43,26 @@ function myFunction() {
 	var addCol = document.createElement("div");
 	addCol.className = "column"
 	for (var key in adds) {
-		var id = adds[key]
+		var id = adds[key];
+		var splitName = key.split(" ");
+		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
+		formattedName = formattedName.replace("--", "-");
+		var hyperlink = document.createElement("a");
 		if (isNaN(id)) {
 			id = id.toLowerCase()
 			var image = document.createElement("IMG");
 			image.className = "reduced";
 			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
-			addCol.appendChild(image);
+			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
 		}
 		else {
 			var image = document.createElement("IMG");
 			image.src = "https://sleepercdn.com/content/nfl/players/" + id + ".jpg";
-			addCol.appendChild(image);
+			hyperlink.href = "https://www.nfl.com/players/" + formattedName + "/stats/logs";
 		}
+
+		hyperlink.appendChild(image);
+		addCol.appendChild(hyperlink);
 
 		var desc = document.createElement("div");
 		desc.className = "row"
@@ -79,19 +86,26 @@ function myFunction() {
 	var dropCol = document.createElement("div");
 	dropCol.className = "column"
 	for (var key in drops) {
-		var id = drops[key]
+		var id = drops[key];
+		var splitName = key.split(" ");
+		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
+		formattedName = formattedName.replace("--", "-");
+		var hyperlink = document.createElement("a");
 		if (isNaN(id)) {
 			id = id.toLowerCase()
 			var image = document.createElement("IMG");
 			image.className = "reduced";
 			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
-			dropCol.appendChild(image);
+			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
 		}
 		else {
 			var image = document.createElement("IMG");
 			image.src = "https://sleepercdn.com/content/nfl/players/" + id + ".jpg";
-			dropCol.appendChild(image);
+			hyperlink.href = "https://www.nfl.com/players/" + formattedName + "/stats/logs";
 		}
+
+		hyperlink.appendChild(image);
+		dropCol.appendChild(hyperlink);
 
 		var desc = document.createElement("div");
 		desc.className = "row"
