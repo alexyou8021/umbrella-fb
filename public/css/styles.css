@@ -13,6 +13,16 @@
     padding-top: 50px;
 }
 
+.column3 {
+    width: 33%;
+    float: left;
+    text-align: center;
+    flex: 1;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: burlywood;
+}
+
 .col-container {
     display: flex;
 }
@@ -31,4 +41,9 @@ img {
 
 .row2 {
     padding: 20px;
+    font-weight: bold;
+}
+
+body {
+    background-color: bisque !important;
 }
