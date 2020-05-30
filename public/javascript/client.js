@@ -48,8 +48,14 @@ function myFunction() {
 console.log(id);
 console.log(key);
 console.log(splitName);
+
+
+
 		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
+		formattedName = formattedName.replace(/'/g, "-");
+console.log(formattedName);		
 		formattedName = formattedName.replace("--", "-");
+console.log(formattedName);
 		var hyperlink = document.createElement("a");
 		if (isNaN(id)) {
 			id = id.toLowerCase()
@@ -58,7 +64,6 @@ console.log(splitName);
 			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
 			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
 		    hyperlink.target = '_blank';
-
 		}
 		else {
 			var image = document.createElement("IMG");
@@ -98,6 +103,7 @@ console.log(splitName);
 		var id = drops[key];
 		var splitName = key.split(" ");
 		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
+		formattedName = formattedName.replace(/'/g, "-");
 		formattedName = formattedName.replace("--", "-");
 		var hyperlink = document.createElement("a");
 		if (isNaN(id)) {
@@ -107,7 +113,6 @@ console.log(splitName);
 			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
 			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
 		    hyperlink.target = '_blank';
-
 		}
 		else {
 			var image = document.createElement("IMG");
