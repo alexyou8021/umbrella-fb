@@ -5,7 +5,7 @@ function myFunction() {
   HTTP.open("GET", url);
   HTTP.send();
 
-  var transactions = document.getElementById("transaction_list")
+  var transactions = document.getElementById("transaction_list");
   transactions.innerHTML = "Getting data...";
   transactions.style.textAlign = "center";
 
@@ -75,8 +75,6 @@ function createWeekRow(week) {
 	var weekText = document.createElement("div");
 	weekText.textContent = "WEEK " + week;
 	weekText.className = "row2";
-	weekText.style.fontWeight = "bold";
-	weekText.style.backgroundColor = "burlywood";
 	return weekText;
 }
 
@@ -120,12 +118,12 @@ function createTransactionColumn(players) {
 		console.log(hyperlink);
 		col.appendChild(hyperlink);
 
-		var desc = document.createElement("div");
+		var desc = document.createElement("p");
 		desc.className = "row"
 		desc.textContent = "Added";
 		col.appendChild(desc);
 
-		var nameDiv = document.createElement("div");
+		var nameDiv = document.createElement("p");
 		nameDiv.className = "row"
 		nameDiv.style.fontWeight = "bold";
 		nameDiv.textContent = name;
@@ -136,14 +134,17 @@ function createTransactionColumn(players) {
 
 function createTotalRow(totalTransactions, totalScore) {
 	var row = document.createElement("div");
-	row.className = "row2";
+	row.className = "row";
+	row.backgroundColor = "aliceblue";
 
 	var titleRow = document.createElement("div");
 	titleRow.className = "row2";
-	titleRow.textContent = "Total";
+	titleRow.textContent = "TOTAL";
+	titleRow.backgroundColor = "burlywood";
 	row.appendChild(titleRow);
 
 	var subtitleRow = document.createElement("div");
+	subtitleRow.className = "col-container";
 
 	var col1 = document.createElement("div");
 	col1.className = "column3";
@@ -163,6 +164,7 @@ function createTotalRow(totalTransactions, totalScore) {
 	row.appendChild(subtitleRow);
 
 	var dataRow = document.createElement("div");
+	dataRow.className = "col-container";
 
 	var col4 = document.createElement("div");
 	col4.className = "column3";

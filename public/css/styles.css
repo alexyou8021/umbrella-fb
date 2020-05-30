@@ -1,3 +1,19 @@
+.navbar-brand {
+    color: burlywood !important;
+}
+
+.navbar-brand:hover {
+    color: bisque !important;
+}
+
+.btn {
+    background-color: burlywood;
+}
+
+.btn:hover {
+    background-color: bisque;
+}
+
 .column {
     width: 33%;
     float: left;
@@ -10,7 +26,7 @@
     float: left;
     text-align: center;
     flex: 1;
-    padding-top: 50px;
+    padding-top: 0px;
 }
 
 .column3 {
@@ -42,8 +58,57 @@ img {
 .row2 {
     padding: 20px;
     font-weight: bold;
+    background-color: burlywood;
 }
 
 body {
     background-color: bisque !important;
+    padding-top: 122px;
+}
+
+.content {
+    max-width: 1500px;
+
+    float: right;
+    position: relative;
+    left: -50%; /* or right 50% */
+    text-align: left;
+}
+
+.content > .row {
+  position: relative;
+  left: 50%;
+  padding: 0px;
+}
+
+.content > .row2 {
+    position: relative;
+    left: 50%;
+    padding: 20px;
+    font-weight: bold;
+    background-color: burlywood;
+}
+
+h2 {
+    font-size: 3vw !important;
+}
+
+
+h3 {
+    font-size: 3vw !important;
+}
+
+@media screen and (min-width: 1001px) {
+  h2 {
+    font-size: 1vw !important;
+  }
+
+
+  h3 {
+    font-size: 1vw !important;
+  }
+
+  body {
+    padding-top: 50px;
+  }
 }
