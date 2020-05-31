@@ -52,9 +52,9 @@ function myFunction() {
 
         var transactionRow = document.createElement("div");
 	transactionRow.className = "col-container"
-	transactionRow.appendChild(createTransactionColumn(adds));
+	transactionRow.appendChild(createTransactionColumn(adds, "Added"));
 	transactionRow.appendChild(createTransactionDescription(type, score));
-	transactionRow.appendChild(createTransactionColumn(drops));
+	transactionRow.appendChild(createTransactionColumn(drops, "Dropped"));
         transactionRow.appendChild(document.createElement("br"));
 	weekRow.appendChild(transactionRow);
       }
@@ -91,6 +91,11 @@ function createTransactionDescription(type, score) {
 	var typeRow = document.createElement("h2");
 	typeRow.style.fontWeight = "bold";
 	typeRow.textContent = type;
+	if (score > 0) {
+		typeRow.style.color = "green";
+	} else if (score < 0) {
+		typeRow.style.color = "red";
+	}
 	col.appendChild(typeRow);
 
 	var scoreRow = document.createElement("h2");
@@ -100,7 +105,7 @@ function createTransactionDescription(type, score) {
 	return col;
 }
 
-function createTransactionColumn(players) {
+function createTransactionColumn(players, type) {
 	var col = document.createElement("div");
 	col.className = "column"
 	for (var index in players) {
@@ -128,7 +133,7 @@ function createTransactionColumn(players) {
 
 		var desc = document.createElement("p");
 		desc.className = "row"
-		desc.textContent = "Added";
+		desc.textContent = type;
 		col.appendChild(desc);
 
 		var nameDiv = document.createElement("p");
@@ -156,40 +161,20 @@ function createTotalRow(totalTransactions, totalScore) {
 
 	var col1 = document.createElement("div");
 	col1.className = "column3";
-	col1.textContent = "Transactions:";
+	col1.textContent = "Transactions:\n" + totalTransactions;
 
 	var col2 = document.createElement("div");
 	col2.className = "column3";
-	col2.textContent = "Score:";
+	col2.textContent = "Score:\n" + totalScore;
 
 	var col3 = document.createElement("div");
 	col3.className = "column3";
-	col3.textContent = "Grade:";
+	col3.textContent = "Grade:\n" + calculateGrade(totalScore);
 
 	subtitleRow.appendChild(col1);
 	subtitleRow.appendChild(col2);
 	subtitleRow.appendChild(col3);
 	row.appendChild(subtitleRow);
-
-	var dataRow = document.createElement("div");
-	dataRow.className = "col-container";
-
-	var col4 = document.createElement("div");
-	col4.className = "column3";
-	col4.textContent = totalTransactions;
-
-	var col5 = document.createElement("div");
-	col5.className = "column3";
-	col5.textContent = totalScore;
-
-	var col6 = document.createElement("div");
-	col6.className = "column3";
-	col6.textContent = calculateGrade(totalScore);
-
-	dataRow.appendChild(col4);
-	dataRow.appendChild(col5);
-	dataRow.appendChild(col6);
-	row.appendChild(dataRow);
 
 	return row;
 }

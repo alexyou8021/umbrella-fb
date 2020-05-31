@@ -30,7 +30,7 @@
 }
 
 .column3 {
-    width: 33%;
+    width: 100%;
     float: left;
     text-align: center;
     flex: 1;
@@ -41,18 +41,22 @@
 
 .col-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
 }
 
 .team {
-    width: 58%;
+    width: 100%;
 }
 
 .player {
-    width: 80%;
+    width: 72.5%;
 }
 
 .row {
-    padding: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .row2 {
@@ -67,13 +71,12 @@ body {
 }
 
 .content {
-    max-width: 1500px;
-
     float: right;
     position: relative;
     left: -50%; /* or right 50% */
     text-align: left;
 }
+
 
 .content > .row {
   position: relative;
@@ -98,8 +101,8 @@ h3 {
     font-size: 3vw !important;
 }
 
-img {
-    overflow:hidden important!;
+hr {
+        border-top: 1px solid burlywood !important;
 }
 
 @media screen and (min-width: 1001px) {
@@ -115,4 +118,29 @@ img {
   body {
     padding-top: 50px;
   }
+
+  .col-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+  }
+
+
+  .team {
+    width: 58%;
+  }
+
+  .player {
+    width: 80%;
+  }
+
+  .content {
+    max-width: 1500px;
+    float: right;
+    position: relative;
+    left: -50%; /* or right 50% */
+    text-align: left;
+  }
+
 }
