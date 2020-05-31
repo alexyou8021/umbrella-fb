@@ -1,6 +1,12 @@
 function myFunction() {
+   var urlParams = new URLSearchParams(window.location.search);
+   var searchParam = urlParams.get('search');
+   if (searchParam == "") {
+       return;
+   }
+
   const HTTP = new XMLHttpRequest();
-  const url = "https://sleeper-wrapper.herokuapp.com/user/" + document.getElementById("search").value;
+  const url = "https://sleeper-wrapper.herokuapp.com/user/" + searchParam;
   HTTP.responseType = 'json';
   HTTP.open("GET", url);
   HTTP.send();
@@ -109,10 +115,12 @@ function createTransactionColumn(players) {
 		hyperlink.target = '_blank';
 
 		var image = document.createElement("IMG");
-		if (isNaN(id)) {
-			image.className = "reduced";
-		}
 		image.src = imageURL;
+		if (isNaN(id)) {
+			image.className = "team";
+		} else {
+			image.className = "player";
+		}
 
 		hyperlink.appendChild(image);
 		console.log(hyperlink);

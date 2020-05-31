@@ -43,12 +43,12 @@
     display: flex;
 }
 
-img {
-    width: 80%;
+.team {
+    width: 58%;
 }
 
-.reduced {
-    width: 58%;
+.player {
+    width: 80%;
 }
 
 .row {
@@ -96,6 +96,10 @@ h2 {
 
 h3 {
     font-size: 3vw !important;
+}
+
+img {
+    overflow:hidden important!;
 }
 
 @media screen and (min-width: 1001px) {
