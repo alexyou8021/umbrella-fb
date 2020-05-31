@@ -30,39 +30,43 @@ function myFunction() {
       var weekRow = document.createElement("div");
       weekRow.className = "row";
       var totalScore = 0;
-      for(var i = 0; i < resp.length; i++) {
+      for(var i = 0; i < resp.length; i++) 
+      {
         var obj = resp[i];
-	var week = obj["week"];
-	var adds = obj["adds"];
-	var drops = obj["drops"];
-	var score = obj["score"];
-	var type = transactionTypeToString(obj["type"]);
+		var week = obj["week"];
+		var adds = obj["adds"];
+		var drops = obj["drops"];
+		var score = obj["score"];
+		var type = transactionTypeToString(obj["type"]);
 
-	totalScore += score;
+		totalScore += score;
 
-	if (previousWeek != week) {
-		if (previousWeek != -1) {
-        		transactions.appendChild(weekRow);
-      			weekRow = document.createElement("div");
-      			weekRow.className = "row";
+		if (previousWeek != week) 
+		{
+			if (previousWeek != -1) 
+			{
+	        		transactions.appendChild(weekRow);
+	      			weekRow = document.createElement("div");
+	      			weekRow.className = "row";
+			}
+			var weekText = createWeekRow(week);
+			weekRow.appendChild(weekText);
+			previousWeek = week;
 		}
-		var weekText = createWeekRow(week);
-		weekRow.appendChild(weekText);
-		previousWeek = week;
-	}
-	else {
-		var divider = document.createElement("hr");
-		weekRow.appendChild(divider);
-	}
+		else 
+		{
+			var divider = document.createElement("hr");
+			weekRow.appendChild(divider);
+		}
 
-        var transactionRow = document.createElement("div");
-	transactionRow.className = "col-container"
-	transactionRow.appendChild(createTransactionColumn(adds, "Added"));
-	transactionRow.appendChild(createTransactionDescription(type, score));
-	transactionRow.appendChild(createTransactionColumn(drops, "Dropped"));
-        transactionRow.appendChild(document.createElement("br"));
-	weekRow.appendChild(transactionRow);
-      }
+	    var transactionRow = document.createElement("div");
+		transactionRow.className = "col-container"
+		transactionRow.appendChild(createTransactionColumn(adds, "Added"));
+		transactionRow.appendChild(createTransactionDescription(type, score));
+		transactionRow.appendChild(createTransactionColumn(drops, "Dropped"));
+	    transactionRow.appendChild(document.createElement("br"));
+		weekRow.appendChild(transactionRow);
+	  }
       transactions.appendChild(weekRow);
       transactions.appendChild(createTotalRow(resp.length, totalScore));
     }
@@ -121,8 +125,13 @@ function createTransactionColumn(players, type) {
 		var link = player.hyperlink;
 
 		var hyperlink = document.createElement("a");
+
 		hyperlink.href = link;
 		hyperlink.target = '_blank';
+
+			var hyperlink2 = document.createElement("a");
+			hyperlink2.href = link;
+			hyperlink2.target = '_blank';
 
 		var image = document.createElement("IMG");
 		image.src = imageURL;
@@ -133,19 +142,22 @@ function createTransactionColumn(players, type) {
 		}
 
 		hyperlink.appendChild(image);
-		console.log(hyperlink);
 		col.appendChild(hyperlink);
 
 		var desc = document.createElement("p");
 		desc.className = "row"
 		desc.textContent = type;
+
 		col.appendChild(desc);
 
 		var nameDiv = document.createElement("p");
 		nameDiv.className = "row"
 		nameDiv.style.fontWeight = "bold";
+		nameDiv.style.color = "black";
 		nameDiv.textContent = name;
-		col.appendChild(nameDiv);
+		hyperlink2.appendChild(nameDiv);
+		col.appendChild(hyperlink2);
+//		col.appendChild(nameDiv);
 	}
 	return col;
 }
