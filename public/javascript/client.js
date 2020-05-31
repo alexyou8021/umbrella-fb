@@ -1,23 +1,43 @@
+function setQueryParams() {
+	window.location.search = "search=" + document.getElementById("search").value;
+}
+
 function myFunction() {
+   var urlParams = new URLSearchParams(window.location.search);
+   var searchParam = urlParams.get('search');
+   if (searchParam == "") {
+       return;
+   }
+
   const HTTP = new XMLHttpRequest();
-  const url = "https://sleeper-wrapper.herokuapp.com/user/" + document.getElementById("search").value;
+  const url = "https://sleeper-wrapper.herokuapp.com/user/" + searchParam;
   HTTP.responseType = 'json';
   HTTP.open("GET", url);
   HTTP.send();
+
+  var transactions = document.getElementById("transaction_list");
+  transactions.innerHTML = "Getting data...";
+  transactions.style.textAlign = "center";
+
   HTTP.onreadystatechange=(e)=>{
     var resp = HTTP.response;
-    var transactions = document.getElementById("transaction_list")
     transactions.innerHTML = "";
+
     if (resp != null) {
+      console.log(resp);
       var previousWeek = -1;
       var weekRow = document.createElement("div");
       weekRow.className = "row";
+      var totalScore = 0;
       for(var i = 0; i < resp.length; i++) {
         var obj = resp[i];
 	var week = obj["week"];
 	var adds = obj["adds"];
 	var drops = obj["drops"];
 	var score = obj["score"];
+	var type = transactionTypeToString(obj["type"]);
+
+	totalScore += score;
 
 	if (previousWeek != week) {
 		if (previousWeek != -1) {
@@ -25,11 +45,7 @@ function myFunction() {
       			weekRow = document.createElement("div");
       			weekRow.className = "row";
 		}
-      		var weekText = document.createElement("div");
-		weekText.textContent = "Week " + week;
-      		weekText.className = "row2";
-		weekText.style.fontWeight = "bold";
-      		weekText.style.backgroundColor = "gray";
+		var weekText = createWeekRow(week);
 		weekRow.appendChild(weekText);
 		previousWeek = week;
 	}
@@ -40,107 +56,142 @@ function myFunction() {
 
         var transactionRow = document.createElement("div");
 	transactionRow.className = "col-container"
-	var addCol = document.createElement("div");
-	addCol.className = "column"
-	for (var key in adds) { //adds is a map of all players/defenses that were added
-		var id = adds[key]; //key is the index essentially bc of for loop
-		var splitName = key.split(" "); //
-console.log(id);
-console.log(key);
-console.log(splitName);
+	transactionRow.appendChild(createTransactionColumn(adds, "Added"));
+	transactionRow.appendChild(createTransactionDescription(type, score));
+	transactionRow.appendChild(createTransactionColumn(drops, "Dropped"));
+        transactionRow.appendChild(document.createElement("br"));
+	weekRow.appendChild(transactionRow);
+      }
+      transactions.appendChild(weekRow);
+      transactions.appendChild(createTotalRow(resp.length, totalScore));
+    }
+  }
+}
 
+function transactionTypeToString(type) {
+	switch(type) {
+	case "free_agent":
+		return "FREE AGENT PICKUP"
+	case "waiver":
+		return "WAIVER PICKUP"
+	case "trade":
+		return "TRADE";
+	default:
+		return "";
+	}
+}
 
+function createWeekRow(week) {
+	var weekText = document.createElement("div");
+	weekText.textContent = "WEEK " + week;
+	weekText.className = "row2";
+	return weekText;
+}
 
-		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
-		formattedName = formattedName.replace(/'/g, "-");
-console.log(formattedName);		
-		formattedName = formattedName.replace("--", "-");
-console.log(formattedName);
+function createTransactionDescription(type, score) {
+	var col = document.createElement("div");
+	col.className = "column2";
+
+	var typeRow = document.createElement("h2");
+	typeRow.style.fontWeight = "bold";
+	typeRow.textContent = type;
+	if (score > 0) {
+		typeRow.style.color = "green";
+	} else if (score < 0) {
+		typeRow.style.color = "red";
+	}
+	col.appendChild(typeRow);
+
+	var scoreRow = document.createElement("h2");
+	scoreRow.style.fontWeight = "bold";
+	scoreRow.textContent = "Transaction Score: " + score;
+	col.appendChild(scoreRow);
+	return col;
+}
+
+function createTransactionColumn(players, type) {
+	var col = document.createElement("div");
+	col.className = "column"
+	for (var index in players) {
+		var player = players[index];
+		var id = player.id; //key is the index essentially bc of for loop
+		var name = player.name;
+		var imageURL = player.image_url;
+		var link = player.hyperlink;
+
 		var hyperlink = document.createElement("a");
-		if (isNaN(id)) {
-			id = id.toLowerCase()
-			var image = document.createElement("IMG");
-			image.className = "reduced";
-			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
-			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
-		    hyperlink.target = '_blank';
-		}
-		else {
-			var image = document.createElement("IMG");
-			image.src = "https://sleepercdn.com/content/nfl/players/" + id + ".jpg";
-			hyperlink.href = "https://www.nfl.com/players/" + formattedName + "/stats/logs";
-            hyperlink.target = '_blank';
+		hyperlink.href = link;
+		hyperlink.target = '_blank';
 
+		var image = document.createElement("IMG");
+		image.src = imageURL;
+		if (isNaN(id)) {
+			image.className = "team";
+		} else {
+			image.className = "player";
 		}
 
 		hyperlink.appendChild(image);
 		console.log(hyperlink);
+		col.appendChild(hyperlink);
 
-		addCol.appendChild(hyperlink);
-
-		var desc = document.createElement("div");
+		var desc = document.createElement("p");
 		desc.className = "row"
-		desc.textContent = "Added";
-		addCol.appendChild(desc);
+		desc.textContent = type;
+		col.appendChild(desc);
 
-		var name = document.createElement("div");
-		name.className = "row"
-		name.style.fontWeight = "bold";
-		name.textContent = key;
-		addCol.appendChild(name);
+		var nameDiv = document.createElement("p");
+		nameDiv.className = "row"
+		nameDiv.style.fontWeight = "bold";
+		nameDiv.textContent = name;
+		col.appendChild(nameDiv);
 	}
-	transactionRow.appendChild(addCol);
+	return col;
+}
 
-	var scoreCol = document.createElement("div");
-	scoreCol.className = "column2";
-	scoreCol.style.fontWeight = "bold";
-	scoreCol.textContent = score;
-	transactionRow.appendChild(scoreCol);
+function createTotalRow(totalTransactions, totalScore) {
+	var row = document.createElement("div");
+	row.className = "row";
+	row.backgroundColor = "aliceblue";
 
-	var dropCol = document.createElement("div");
-	dropCol.className = "column"
-	for (var key in drops) {
-		var id = drops[key];
-		var splitName = key.split(" ");
-		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
-		formattedName = formattedName.replace(/'/g, "-");
-		formattedName = formattedName.replace("--", "-");
-		var hyperlink = document.createElement("a");
-		if (isNaN(id)) {
-			id = id.toLowerCase()
-			var image = document.createElement("IMG");
-			image.className = "reduced";
-			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
-			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
-		    hyperlink.target = '_blank';
-		}
-		else {
-			var image = document.createElement("IMG");
-			image.src = "https://sleepercdn.com/content/nfl/players/" + id + ".jpg";
-			hyperlink.href = "https://www.nfl.com/players/" + formattedName + "/stats/logs";
-	        hyperlink.target = '_blank';
-	
-		}
+	var titleRow = document.createElement("div");
+	titleRow.className = "row2";
+	titleRow.textContent = "TOTAL";
+	titleRow.backgroundColor = "burlywood";
+	row.appendChild(titleRow);
 
-		hyperlink.appendChild(image);
-		dropCol.appendChild(hyperlink);
+	var subtitleRow = document.createElement("div");
+	subtitleRow.className = "col-container";
 
-		var desc = document.createElement("div");
-		desc.className = "row"
-		desc.textContent = "Dropped";
-		dropCol.appendChild(desc);
+	var col1 = document.createElement("div");
+	col1.className = "column3";
+	col1.textContent = "Transactions:\n" + totalTransactions;
 
-		var name = document.createElement("div");
-		name.className = "row"
-		name.style.fontWeight = "bold";
-		name.textContent = key;
-		dropCol.appendChild(name);
+	var col2 = document.createElement("div");
+	col2.className = "column3";
+	col2.textContent = "Score:\n" + totalScore;
+
+	var col3 = document.createElement("div");
+	col3.className = "column3";
+	col3.textContent = "Grade:\n" + calculateGrade(totalScore);
+
+	subtitleRow.appendChild(col1);
+	subtitleRow.appendChild(col2);
+	subtitleRow.appendChild(col3);
+	row.appendChild(subtitleRow);
+
+	return row;
+}
+
+function calculateGrade(score) {
+	if (score <= 0) {
+		return "F";
+	} else if (score <= 50) {
+		return "D";
+	} else if (score <= 200) {
+		return "C";
+	} else if (score <= 400) {
+		return "B";
 	}
-	transactionRow.appendChild(dropCol);
-        transactionRow.innerHTML += "<br>";
-	weekRow.appendChild(transactionRow);
-      }
-      transactions.appendChild(weekRow);
-    }
-  }
+	return "A";
 }

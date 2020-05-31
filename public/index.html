@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script data-ad-client="ca-pub-6880566092237886" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand">Captain Hindsight</a>
+        <a class="navbar-brand" href="">Captain Hindsight</a>
       </div>
       <form class="navbar-form navbar-left">
         <div class="form-group">
-          <button type="button" class="btn" style="float:right" onclick="myFunction()">Submit</button>
+          <button type="button" class="btn" style="float:right" onclick="setQueryParams()">Submit</button>
           <div style="overflow: hidden; padding-right: .5em;">
             <input type="text" class="form-control" placeholder="Enter Sleeper ID" name="search" id="search">
           </div>
@@ -26,11 +27,8 @@
     </div>
   </nav>
 
-  <br><br><br>
-  <br><br><br>
-
-  <body>
-    <div id="transaction_list"></div>
+  <body onload="myFunction()">
+    <div id="transaction_list" class="content"></div>
 
     <script src="javascript/client.js"></script>
   </body>
