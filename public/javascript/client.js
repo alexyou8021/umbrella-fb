@@ -42,11 +42,20 @@ function myFunction() {
 	transactionRow.className = "col-container"
 	var addCol = document.createElement("div");
 	addCol.className = "column"
-	for (var key in adds) {
-		var id = adds[key];
-		var splitName = key.split(" ");
+	for (var key in adds) { //adds is a map of all players/defenses that were added
+		var id = adds[key]; //key is the index essentially bc of for loop
+		var splitName = key.split(" "); //
+console.log(id);
+console.log(key);
+console.log(splitName);
+
+
+
 		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
+		formattedName = formattedName.replace(/'/g, "-");
+console.log(formattedName);		
 		formattedName = formattedName.replace("--", "-");
+console.log(formattedName);
 		var hyperlink = document.createElement("a");
 		if (isNaN(id)) {
 			id = id.toLowerCase()
@@ -54,14 +63,19 @@ function myFunction() {
 			image.className = "reduced";
 			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
 			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
+		    hyperlink.target = '_blank';
 		}
 		else {
 			var image = document.createElement("IMG");
 			image.src = "https://sleepercdn.com/content/nfl/players/" + id + ".jpg";
 			hyperlink.href = "https://www.nfl.com/players/" + formattedName + "/stats/logs";
+            hyperlink.target = '_blank';
+
 		}
 
 		hyperlink.appendChild(image);
+		console.log(hyperlink);
+
 		addCol.appendChild(hyperlink);
 
 		var desc = document.createElement("div");
@@ -89,6 +103,7 @@ function myFunction() {
 		var id = drops[key];
 		var splitName = key.split(" ");
 		var formattedName = splitName[0].replace(/\./g, "-") + "-" + splitName[1];
+		formattedName = formattedName.replace(/'/g, "-");
 		formattedName = formattedName.replace("--", "-");
 		var hyperlink = document.createElement("a");
 		if (isNaN(id)) {
@@ -97,11 +112,14 @@ function myFunction() {
 			image.className = "reduced";
 			image.setAttribute("src", "https://sleepercdn.com/images/team_logos/nfl/" + id + ".png");
 			hyperlink.href = "https://www.nfl.com/teams/" + formattedName + "/stats";
+		    hyperlink.target = '_blank';
 		}
 		else {
 			var image = document.createElement("IMG");
 			image.src = "https://sleepercdn.com/content/nfl/players/" + id + ".jpg";
 			hyperlink.href = "https://www.nfl.com/players/" + formattedName + "/stats/logs";
+	        hyperlink.target = '_blank';
+	
 		}
 
 		hyperlink.appendChild(image);
