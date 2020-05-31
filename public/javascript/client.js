@@ -1,3 +1,7 @@
+function setQueryParams() {
+	window.location.search = "search=" + document.getElementById("search").value;
+}
+
 function myFunction() {
    var urlParams = new URLSearchParams(window.location.search);
    var searchParam = urlParams.get('search');
