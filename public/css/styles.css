@@ -1,17 +1,17 @@
 .navbar-brand {
-    color: burlywood !important;
+    color: #EDEEF0 !important;
 }
 
 .navbar-brand:hover {
-    color: bisque !important;
+    color: #DCDDDF !important;
 }
 
 .btn {
-    background-color: burlywood;
+    background-color: #EDEEF0;
 }
 
 .btn:hover {
-    background-color: bisque;
+    background-color: #DCDDDF;
 }
 
 .column {
@@ -36,7 +36,7 @@
     flex: 1;
     padding-top: 50px;
     padding-bottom: 50px;
-    background-color: burlywood;
+    background-color: #EDEEF0;
 }
 
 .col-container {
@@ -55,6 +55,7 @@
 }
 
 .row {
+  background-color: #EDEEF0;
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -62,11 +63,11 @@
 .row2 {
     padding: 20px;
     font-weight: bold;
-    background-color: burlywood;
+    background-color: #DCDDDF;
 }
 
 body {
-    background-color: bisque !important;
+    background-color: #EDEEF0 !important;
     padding-top: 122px;
 }
 
@@ -89,7 +90,7 @@ body {
     left: 50%;
     padding: 20px;
     font-weight: bold;
-    background-color: burlywood;
+    background-color: #DCDDDF;
 }
 
 h2 {
@@ -102,7 +103,7 @@ h3 {
 }
 
 hr {
-        border-top: 1px solid burlywood !important;
+        border-top: 1px solid #DCDDDF !important;
 }
 
 
@@ -150,11 +151,15 @@ hr {
       float: right;
       margin: 5px;
       padding: 9px 25px;
-      background-color: white;
+      background-color: #EDEEF0;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease 0s;
       font-size: 16px;
+  }
+
+  .logIn:hover{
+    background-color: #DCDDDF;
   }
 }
