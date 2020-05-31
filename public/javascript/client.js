@@ -10,7 +10,8 @@ function myFunction() {
    }
 
   const HTTP = new XMLHttpRequest();
-  const url = "https://sleeper-wrapper.herokuapp.com/user/" + searchParam;
+  const url = "https://sleeper-wrapper.herokuapp.com/user/sleeper/" + searchParam;
+  //const url = "https://sleeper-wrapper.herokuapp.com/user/espn/" + searchParam;
   HTTP.responseType = 'json';
   HTTP.open("GET", url);
   HTTP.send();
