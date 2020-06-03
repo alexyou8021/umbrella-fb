@@ -38,7 +38,7 @@ function myFunction() {
 		var drops = obj["drops"];
 		var score = obj["score"];
 		var type = transactionTypeToString(obj["type"]);
-
+console.log(score);
 		totalScore += score;
 
 		if (previousWeek != week) 
@@ -68,7 +68,7 @@ function myFunction() {
 		weekRow.appendChild(transactionRow);
 	  }
       transactions.appendChild(weekRow);
-      transactions.appendChild(createTotalRow(resp.length, totalScore));
+      transactions.appendChild(createTotalRow(resp.length, totalScore.toFixed(2)));
     }
   }
 }
