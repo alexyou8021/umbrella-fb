@@ -1,3 +1,46 @@
+function isMobile() {
+	var userAgent = window.navigator.userAgent;
+	if(userAgent.match(/Android/i)
+ 		|| userAgent.match(/webOS/i)
+ 		|| userAgent.match(/iPhone/i)
+ 		|| userAgent.match(/iPad/i)
+ 		|| userAgent.match(/iPod/i)
+ 		|| userAgent.match(/BlackBerry/i)
+ 		|| userAgent.match(/Windows Phone/i)) {
+		return true;
+	}
+}
+
+function togglePageDropdown() {
+	if (!isMobile()) {
+		return;
+	}
+
+	var dropdownList = document.getElementById("pages");
+	var memberList = document.getElementById("member_list");
+	if (dropdownList.style.display == "block") {
+		dropdownList.style.display = "none";
+	} else {
+		dropdownList.style.display = "block";
+		memberList.style.display = "none";
+	}
+}
+
+function toggleMemberDropdown() {
+	if (!isMobile()) {
+		return;
+	}
+
+	var dropdownList = document.getElementById("pages");
+	var memberList = document.getElementById("member_list");
+	if (memberList.style.display == "block") {
+		memberList.style.display = "none";
+	} else {
+		memberList.style.display = "block";
+		dropdownList.style.display = "none";
+	}
+}
+
 function setQueryParams() {
 	window.location.search = "search=" + document.getElementById("search").value;
 }
@@ -17,8 +60,11 @@ function myFunction() {
   HTTP.send();
 
   var transactions = document.getElementById("transaction_list");
-  transactions.innerHTML = "Getting data...";
   transactions.style.textAlign = "center";
+  var loadingRow = document.createElement("div");
+  loadingRow.className = "row2";
+  loadingRow.textContent = "Getting data...";
+  transactions.appendChild(loadingRow);
 
   HTTP.onreadystatechange=(e)=>{
     var resp = HTTP.response;
@@ -49,7 +95,8 @@ function myFunction() {
       	var member = document.createElement("a");
 	var teamName = leagueMembers[i]["team_name"];
 	if (teamName == "") {
-		teamName = "Team " + (i + 1);
+		var ownerName = leagueMembers[i]["owner_username"];
+		teamName = "Team " + ownerName;
 	}
 	if (leagueMembers[i]["owner_id"] == searchParam) {
 		member.style.fontWeight = "bold";
@@ -67,7 +114,7 @@ function myFunction() {
 		var drops = obj["drops"];
 		var score = obj["score"];
 		var type = transactionTypeToString(obj["type"]);
-console.log(score);
+		console.log(score);
 		totalScore += score;
 
 		if (previousWeek != week) 
@@ -95,7 +142,7 @@ console.log(score);
 		transactionRow.appendChild(createTransactionColumn(drops, "Dropped"));
 	    transactionRow.appendChild(document.createElement("br"));
 		weekRow.appendChild(transactionRow);
-	  }
+      }
       transactions.appendChild(weekRow);
       transactions.appendChild(createTotalRow(transactionDetails.length, totalScore.toFixed(2)));
     }
@@ -153,17 +200,23 @@ function createTransactionColumn(players, type) {
 		var imageURL = player.image_url;
 		var link = player.hyperlink;
 
+		if (id == "waiver") {
+			name = "$" + name + " FAAB";
+			imageURL = "faab.png";
+		}
+
 		var hyperlink = document.createElement("a");
 
 		hyperlink.href = link;
 		hyperlink.target = '_blank';
 
-			var hyperlink2 = document.createElement("a");
-			hyperlink2.href = link;
-			hyperlink2.target = '_blank';
+		var hyperlink2 = document.createElement("a");
+		hyperlink2.href = link;
+		hyperlink2.target = '_blank';
 
 		var image = document.createElement("IMG");
 		image.src = imageURL;
+
 		if (isNaN(id)) {
 			image.className = "team";
 		} else {
@@ -186,7 +239,7 @@ function createTransactionColumn(players, type) {
 		nameDiv.textContent = name;
 		hyperlink2.appendChild(nameDiv);
 		col.appendChild(hyperlink2);
-//		col.appendChild(nameDiv);
+		col.appendChild(nameDiv);
 	}
 	return col;
 }

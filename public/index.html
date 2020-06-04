@@ -13,20 +13,28 @@
   </head>
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
+      <div class="dropdown" style="float:left;" onclick="togglePageDropdown()">
+        <button class="dropbtn">
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="dropdown-content" id="pages">
+          <a>Home</a>
+	  <a>About</a>
+	  <a>Login</a>
+        </div>
+      </div>
       <div class="navbar-header">
-        <a class="navbar-brand" href="">Captain Hindsight</a>
-        <div class="dropdown">
-          <button class="dropbtn" style="display:none;" id="league_dropdown">
+        <a class="navbar-brand" href="" id="home">Captain Hindsight</a>
+        <div class="dropdown" style="float:right;">
+          <button class="dropbtn" style="display:none;" id="league_dropdown" onclick="toggleMemberDropdown()">
             League
             <i class="fa fa-caret-down"></i>
           </button>
         <div class="dropdown-content" id="member_list">
-          <a href="#">Link 1</a>
         </div>
       </div>
     </div>
-      <form class="navbar-form navbar-left">
+      <form class="navbar-form navbar-right">
         <div class="form-group">
           <button type="button" class="btn" style="float:right" onclick="setQueryParams()">Submit</button>
           <div style="overflow: hidden; padding-right: .5em;">
@@ -34,7 +42,6 @@
           </div>  
         </div>
       </form>             
-      <a class="cta" href="#"><button class = "logIn" >Log In/Sign Up</button></a>
     </div>
   </nav>
 
