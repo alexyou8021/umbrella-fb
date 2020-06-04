@@ -26,13 +26,17 @@ function myFunction() {
 
     if (resp != null) {
       console.log(resp);
+      var transactionDetails = resp["transaction_details"];
+      var leagueId = resp["league_id"];
+      var leagueName = resp["league_name"];
+      var leagueMembers = resp["league_members"];
       var previousWeek = -1;
       var weekRow = document.createElement("div");
       weekRow.className = "row";
       var totalScore = 0;
-      for(var i = 0; i < resp.length; i++) 
+      for(var i = 0; i < transactionDetails.length; i++) 
       {
-        var obj = resp[i];
+        var obj = transactionDetails[i];
 		var week = obj["week"];
 		var adds = obj["adds"];
 		var drops = obj["drops"];
@@ -68,7 +72,7 @@ console.log(score);
 		weekRow.appendChild(transactionRow);
 	  }
       transactions.appendChild(weekRow);
-      transactions.appendChild(createTotalRow(resp.length, totalScore.toFixed(2)));
+      transactions.appendChild(createTotalRow(transactionDetails.length, totalScore.toFixed(2)));
     }
   }
 }
