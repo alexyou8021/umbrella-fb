@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/styles.css?v=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script data-ad-client="ca-pub-6880566092237886" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -15,20 +16,26 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="">Captain Hindsight</a>
+        <div class="dropdown">
+          <button class="dropbtn" style="display:none;" id="league_dropdown">
+            League
+            <i class="fa fa-caret-down"></i>
+          </button>
+        <div class="dropdown-content" id="member_list">
+          <a href="#">Link 1</a>
+        </div>
       </div>
-
-      <form class="navbar-form navbar-left">
-          <div class="form-group">
-            <button type="button" class="btn" style="float:right" onclick="setQueryParams()">Submit</button>
-            <div style="overflow: hidden; padding-right: .5em;">
-              <input type="text" class="form-control" placeholder="Enter Sleeper ID" name="search" id="search">
-            </div>  
-          </div>
-      </form>
-                
-            <a class="cta" href="#"><button class = "logIn" >Log In/Sign Up</button></a>
     </div>
-
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <button type="button" class="btn" style="float:right" onclick="setQueryParams()">Submit</button>
+          <div style="overflow: hidden; padding-right: .5em;">
+            <input type="text" class="form-control" placeholder="Enter Sleeper ID" name="search" id="search">
+          </div>  
+        </div>
+      </form>             
+      <a class="cta" href="#"><button class = "logIn" >Log In/Sign Up</button></a>
+    </div>
   </nav>
 
   <body onload="myFunction()">

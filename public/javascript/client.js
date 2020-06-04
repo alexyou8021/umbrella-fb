@@ -34,6 +34,31 @@ function myFunction() {
       var weekRow = document.createElement("div");
       weekRow.className = "row";
       var totalScore = 0;
+
+      var leagueDropdown = document.getElementById("league_dropdown");
+      leagueDropdown.textContent = leagueName;
+      var caret = document.createElement("i");
+      caret.className = "fa fa-caret-down";
+      leagueDropdown.appendChild(caret);
+      leagueDropdown.style.display = "inline";
+
+      var memberList = document.getElementById("member_list");
+      memberList.innerHTML = "";
+      for(var i = 0; i < leagueMembers.length; i++)
+      {
+      	var member = document.createElement("a");
+	var teamName = leagueMembers[i]["team_name"];
+	if (teamName == "") {
+		teamName = "Team " + (i + 1);
+	}
+	if (leagueMembers[i]["owner_id"] == searchParam) {
+		member.style.fontWeight = "bold";
+	}
+	member.textContent = teamName;
+        member.href = window.location.origin + "?search=" + leagueMembers[i]["owner_id"];
+        memberList.appendChild(member);
+      }
+
       for(var i = 0; i < transactionDetails.length; i++) 
       {
         var obj = transactionDetails[i];
