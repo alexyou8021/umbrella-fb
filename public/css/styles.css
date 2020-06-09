@@ -1,5 +1,6 @@
 .navbar-brand {
     color: #EDEEF0 !important;
+    display: none !important;
 }
 
 .navbar-brand:hover {
@@ -60,8 +61,6 @@
 
 .row {
   background-color: #EDEEF0;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .row2 {
@@ -110,23 +109,23 @@ hr {
         border-top: 1px solid #DCDDDF !important;
 }
 
+.form-group {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
 .navbar {
   //overflow: hidden;
   background-color: #333;
 }
 
-/*.navbar a {
+.navbar a {
   float: left;
   font-size: 16px;
-  color: red;
+  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-}*/
-
-.dropdown {
-  float: right;
-  //overflow: hidden;
 }
 
 .dropdown .dropbtn {
@@ -138,10 +137,6 @@ hr {
   background-color: inherit;
   font-family: inherit;
   margin: 0;
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
 }
 
 .dropdown-content {
@@ -156,18 +151,35 @@ hr {
 .dropdown-content a {
   float: none;
   color: black;
-  padding: 12px 16px;
+  padding: 4px 16px;
   text-decoration: none;
   display: block;
   text-align: left;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-bottom-color: #EDEEF0;
 }
 
-.dropdown-content a:hover {
-  background-color: #ddd;
+.navbar #myLinks {
+  //display: none;
 }
 
-.dropdown:hover .dropdown-content {
+a.icon {
   display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.navbar #myLinks {
+  //display: none;
+}
+
+a.icon {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 @media screen and (min-width: 1001px) {
@@ -208,21 +220,19 @@ hr {
     text-align: left;
   }
 
-  .logIn{
-      color: black;
-      float: right;
-      margin: 9px;
-      padding: 6px 7px;
-      background-color: #EDEEF0;
-      border: none;
-      border-radius: 3px;
-      font-size: 
-      cursor: pointer;
-      transition: all 0.3s ease 0s;
-      font-size: 14px;
+  .navbar-brand {
+    display: block !important;
   }
 
-  .logIn:hover{
-    background-color: #DCDDDF;
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+  }
+
+  .dropdown-content a:hover, .dropdown-content a:active {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
   }
 }
